@@ -1,4 +1,5 @@
 Particle [] stars;
+OddballParticle oddball;
 void setup()
 {
 	background(0);
@@ -8,19 +9,69 @@ void setup()
 	{
 		stars[i]=new Particle();
 	}
+	oddball = new OddballParticle();
+
 }
 void draw()
 {
-	//your code here
+	for(int i=0;i<stars.length;i++)
+	{
+	stars[i].move();
+	stars[i].show();
+	}
+	oddball.move();
+	oddball.show();
+	fill(0);
+	ellipse(width/2,height/2,50,50);
+}
+void mousePressed()
+{
+	background(0);
+	stars = new Particle[(int)(Math.random()*200)+300];
+	for(int i=0;i<stars.length;i++)
+	{
+		stars[i]=new Particle();
+	}
+	oddball = new OddballParticle();
 }
 class Particle
 {
-	int myX, myY, myAngle, mySpeed;
+	double myX, myY, myAngle, mySpeed;
+	int myColor;
+	Particle()
+	{
+		myX=width/2;
+		myY=height/2;
+		myAngle=Math.random()*(2*Math.PI);
+		mySpeed=Math.random()*10;
+		myColor=color((int)(Math.random()*100),(int)(Math.random()*100),(int)(Math.random()*155)+100);
+	}
+	void move()
+	{
+		myX=myX+(Math.cos(myAngle)*mySpeed);
+		myY=myY+(Math.sin(myAngle)*mySpeed);
+	}
+	void show()
+	{
+		fill(myColor);
+		noStroke();
+		ellipse((float)myX,(float)myY,5,5);
+	}
 }
 
-class OddballParticle //inherits from Particle
+class OddballParticle extends Particle
 {
-	//your code here
+	OddballParticle()
+	{
+		super();
+	}
+	void show()
+	{
+		fill(myColor);
+		stroke(0);
+		rect((float)myX,(float)myY,69,69);
+	}
+
 }
 
 
