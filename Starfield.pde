@@ -1,15 +1,17 @@
 Particle [] stars;
-OddballParticle oddball;
+OddballParticle [] oddball;
 void setup()
 {
 	background(0);
 	size(500,500);
 	stars = new Particle[(int)(Math.random()*200)+300];
+	oddball = new OddballParticle[(int)(Math.random()*10)+1];
 	for(int i=0;i<stars.length;i++)
 	{
 		stars[i]=new Particle();
 	}
-	oddball = new OddballParticle();
+	for(int ii=0;ii<oddball.length;ii++)
+		oddball[ii] = new OddballParticle();
 
 }
 void draw()
@@ -19,8 +21,10 @@ void draw()
 	stars[i].move();
 	stars[i].show();
 	}
-	oddball.move();
-	oddball.show();
+	for(int ii=0;ii<oddball.length;ii++){
+		oddball[ii].move();
+		oddball[ii].show();
+	}
 	fill(0);
 	ellipse(width/2,height/2,50,50);
 }
@@ -28,11 +32,13 @@ void mousePressed()
 {
 	background(0);
 	stars = new Particle[(int)(Math.random()*200)+300];
+	oddball = new OddballParticle[(int)(Math.random()*10)+1];
 	for(int i=0;i<stars.length;i++)
 	{
 		stars[i]=new Particle();
 	}
-	oddball = new OddballParticle();
+	for(int ii=0;ii<oddball.length;ii++)
+		oddball[ii] = new OddballParticle();
 }
 class Particle
 {
